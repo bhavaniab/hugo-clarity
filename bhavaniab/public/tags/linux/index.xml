@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on IRA - Information Retrieval and Analytics</title>
+    <link>https://example.com/tags/linux/</link>
+    <description>Recent content in Linux on IRA - Information Retrieval and Analytics</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <lastBuildDate>Fri, 16 Aug 2013 00:00:00 +0000</lastBuildDate><atom:link href="https://example.com/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Scripting-How is it different from programming?</title>
+      <link>https://example.com/post/scripting-programming/</link>
+      <pubDate>Fri, 16 Aug 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/post/scripting-programming/</guid>
+      <description>
+        
+          &lt;p&gt;What is script for a movie?? Script for a movie describes what actors do. It also describes the interaction between the actors, and connects different sequences of a movie. Scripting languages are also very similar. Scripting is used to automate the execution of tasks which could alternatively be executed one-by-one manually. Environments that can be automated through scripting include software applications, and the operating system shells (OS shells). Scripting languages play a major role in automation testing, because, from a script, you can invoke different programs and test the outputs.&lt;/p&gt;
+&lt;p&gt;During my association at University of Hyderabad, I was working on projects related to Natural language processing, I could see the power of scripting languages. We were building a translation engine, for translating text from one natural language to another, for example from Urdu to Hindi or Sanskrit to Hindi. Scripting languages had the power to use the regular expressions and made text processing very much simpler. Those tasks which required design of state machines in a programming language, could be written by a single line in a scripting language!!!! Let us see an example of a word count program, written in both PERL and C.&lt;/p&gt;
+&lt;p&gt;A word can be defined as set of characters, which are preceded by any number of blank spaces, new lines or tabs. If you had to write the same piece of code in C, a state machine has to be designed (see example in Dennis Ritchie). Scripting language solves the problem with a single line of code.&lt;/p&gt;
+&lt;p&gt;We found highly complex pieces of code, could be written very easily in scripting languages. It has the power to handle regular expressions and text processing.&lt;/p&gt;
+&lt;p&gt;Scripting languages are designed for “gluing” applications. Consider the scenario in which different  modules are written in different languages, like C, Java, C++ etc. and have to be integrated into a single project. Scripting languages play a key role in such type of scenarios.&lt;/p&gt;
+&lt;p&gt;Scripting languages also have the power to access OS facilities. When we were building the migration engine, we could connect to loop devices, do mounts, unmount etc., using python.&lt;/p&gt;
+&lt;p&gt;Scripting languages use typeless approaches to achieve a higher level of programming and more rapid application development than programming languages.  That means, declaration of variables is not required in Scripting. Only assignment would be sufficient.&lt;/p&gt;
+&lt;p&gt;Scripting languages make the life of developer very easy. Enjoy Scripting !!!!!&lt;/p&gt;
+
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>10 most frequently used commands in Linux for beginners</title>
+      <link>https://example.com/post/linux-commands/</link>
+      <pubDate>Fri, 01 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/post/linux-commands/</guid>
+      <description>
+        
+          &lt;p&gt;To all the beginners of linux, I would like to write 10 most frequently used linux commands with a few examples. Please note that the commands have a lot of options, which need to be explored by the user.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;ls&lt;br&gt;
+Stands for listing
+Example : ls
+Lists all the files in the current directory.
+ls -l : Stands for long listing.
+Example : ls -l
+Displays a long list of files including file permissions, users, date and  time of file creation, file size etc.
+ls -a : List all
+Example : ls -a
+lists all the files including the hidden files&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;mkdir&lt;br&gt;
+Stands for make directory.
+This command is used to create a directory.
+Example: mkdir dirname&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;pwd
+Stands for present working directory.
+Example : pwd
+Displays the current working directory that the user is in.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;cp&lt;br&gt;
+Stands for copy
+Example: cp filename dirname/
+copies file with filename to the directory dirname/
+cp -r  :recursive copy
+Example : cp -r dirname1/ dirname2/
+copies the entire directory dirname1/ to the directory dirname2/&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;mv&lt;br&gt;
+Stands for move
+Example :mv filename1 filename2
+Used to change the filename from filename1 to filename2 wihout changing the contents of the files.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;find&lt;br&gt;
+Example: find
+lists all the files and directories in current directory recursively
+Example : find dirname/
+lists all the files in the directory with dirname/&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;rm   :Stands for remove
+Example : rm somefile
+removes the file with name ‘somefile’ in the current directory.
+rm -rf    Stands for recursive forceful remove
+Example : rm -rf dirname/
+remove the entire directory with the dirname&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;b&gt;cd &lt;/b&gt;
+Stands for change directory.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h5&gt;Example 1&lt;/h5&gt;: cd ~/dirname/
+Changes the current directory to /home/username/dirname/
+&lt;h5&gt;Example 2&lt;/h5&gt;: cd ..
+Changes the directory to a previous directory
+9. df  
+Stands for disk free
+Example : df
+Displays the entire disk space available.
+ df -h   : Disk free in human readable form
+Displays the entire disk space in terms of GB, MB etc.
+&lt;ol start=&#34;10&#34;&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;User Manual. Gives the detailed description of the command with options.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;#Example  &lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;#man command_name&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;man ls
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;&amp;lt;!doctype html&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;html&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;lang&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;en&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;head&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;  &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;meta&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;charset&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;utf-8&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;  &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;title&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;Example HTML5 Document&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;title&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;head&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;body&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;  &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;Test&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;body&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;c&#34;&gt;&amp;lt;!-- this line is extraneous 2Error from server (Forbidden): deployments.apps is forbidden: User &amp;#34;chiptest&amp;#34; cannot create resource &amp;#34;deployments&amp;#34; in API group &amp;#34;apps&amp;#34; in the namespace &amp;#34;default&amp;#34; --&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;html&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Significance of parallel builds</title>
+      <link>https://example.com/post/parallel-builds/</link>
+      <pubDate>Wed, 11 Apr 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/post/parallel-builds/</guid>
+      <description>
+        
+          &lt;p&gt;Parallel builds play a significant role for building projects that require huge RAM to compile.
+The best example is chromium build. Suppose the chrome is built by&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;make chrome
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Sometimes, we run into linker errors.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;collect2: ld terminated with signal &lt;span class=&#34;m&#34;&gt;6&lt;/span&gt; Aborted terminate called 
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;after throwing an  instance of &lt;span class=&#34;s1&#34;&gt;&amp;#39;std::bad_alloc&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Building the code by the command&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;make -j6 chrome
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;resolves the liker errors and the build goes through.&lt;/p&gt;
+&lt;h3&gt;What really happens during a parallel build?&lt;/h3&gt;
+&lt;p&gt;To do a parallel build, add -jX where X is the number of make processes to start-up. This is useful for multiple-core machines. Unlike the normal procedural languages like C,C++,PERL etc which execute the commands step by step, make is a utility which does not specify particular order for operations. Each step is taken when necessary dependencies are completed. For multiprocessor machines, the advantage of parallel build is much more because additional CPUs can perform multiple compilations faster than a single CPU.
+Parallel builds can be faster even in uniprocessor environment, because make files perform tasks that can be carried out in parallel, such as such as compiling C source to object files and  creating libraries out of object files. Based on the dependencies of header files, multiple source files can be compiled in parallel.&lt;/p&gt;
+&lt;h3&gt;How does parallel build resolve the linker errors?&lt;/h3&gt;
+The kernel is a piece of software that provides a layer between the hardware and the application programs running on a computer. All the other applications that we have with Linux distribution such as the GNOME window manager, web browsers, etc. are just applications that happen to run on Linux kernel and are not part of the operating system. The kernel makes its services available to the application programs that run on it through a large collection of entry points,known as system calls. From a programmer’s viewpoint,
+these look just like ordinary function calls, although in reality a system call involves a distinct switch in the operating mode of the processor from user space to kernel space.
+The kernel has to work hard to maintain this same abstraction when the filesystem itself might be stored in any of several formats, on local storage devices such as hard disks, CDs or USB memory sticks.
+Swap space in Linux is used when the amount of physical memory (RAM) is full. If the system needs more memory resources and the RAM is full, inactive pages in memory are moved to the swap space. Swap space is located on hard drives, which have a slower access time than physical memory. Each process runs under the illusion that it has an address space (a valid range of memory addresses) to call its own. In reality, it’s sharing the physical memory of the computer with many other processes, and if the system is running low on memory, some of its address space may even be parked out on the disk in the swap area. The parallel builds run as a part of different processes and utilize the physical memory space more efficiently, thus preventing the linker errors during parallel build.
+
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>

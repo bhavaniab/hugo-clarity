@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Technology on IRA - Information Retrieval and Analytics</title>
+    <link>https://example.com/tags/technology/</link>
+    <description>Recent content in Technology on IRA - Information Retrieval and Analytics</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <lastBuildDate>Wed, 15 Jul 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://example.com/tags/technology/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How are videos stored in the digital world- Sampling of video?</title>
+      <link>https://example.com/post/video-sampling/</link>
+      <pubDate>Wed, 15 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/post/video-sampling/</guid>
+      <description>
+        
+          &lt;p&gt;Sampling of an audio signal converts continuous time signal into a discrete time signal. Quantization converts continuous amplitude signal into a discrete amplitude signal. A discrete time and discrete amplitude signal is a digital signal. The present post describes the sampling of a video signal, different characteristics of the video which are considered for sampling, spatial sampling and temporal sampling. A real world video is composed of multiple objects each with their own characteristic shape, depth, texture and illumination. The color and brightness of a natural video changes with varying degrees of smoothness throughout the video (‘continuous tone’). Characteristics of a typical natural video frames that are relevant for video processing and compression include spatial characteristics (texture variation within scene, number and shape of objects, color, etc.) and temporal characteristics (object motion, changes in illumination, movement of the camera or viewpoint and so on). A natural video is spatially and temporally continuous. Representing a video in digital form involves sampling the real scene spatially and temporally.&lt;/p&gt;
+&lt;h3&gt;Spatial sampling&lt;/h3&gt;
+&lt;p&gt;Sampling the signal at a point in time produces a sampled image or frame that has defined values at a set of sampling points. The most common format for a sampled image is a rectangle with the sampling points positioned on a square or rectangular grid. Figure 1 shows a continuous-tone frame with two different sampling grids superimposed upon it. Sampling occurs at each of the intersection points on the grid and the sampled image may be reconstructed by representing each sample as a square picture element (pixel). The visual quality of the image is influenced by the number of sampling points. Choosing a ‘coarse’ sampling grid produces a low-resolution sampled image whilst increasing the number of sampling points slightly increases the resolution of the sampled image.&lt;/p&gt;
+&lt;h3&gt;Temporal sampling&lt;/h3&gt;
+&lt;p&gt;A moving video image is captured by taking a rectangular ‘snapshot’ of the signal at periodic time intervals. Playing back the series of frames produces the appearance of motion. A higher temporal sampling rate (frame rate) gives apparently smoother motion in the video scene but requires more samples to be captured and stored. Frame rates below 10 frames per second are sometimes used for very low bit-rate video communications (because the amount of data is relatively small) but motion is clearly jerky and unnatural at this rate. Between 10 and 20 frames per second is more typical for low bit-rate video communications; the image is smoother but jerky motion may be visible in fast-moving parts of the sequence. Sampling at 25 or 30 complete frames per second is standard for television pictures (with interlacing to improve the appearance of motion, see below); 50 or 60 frames per second produces smooth apparent motion (at the expense of a very high data rate).&lt;/p&gt;
+
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Representation of images in the Digital world -The RGB Colorspace</title>
+      <link>https://example.com/post/rgb-colorspace/</link>
+      <pubDate>Wed, 15 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/post/rgb-colorspace/</guid>
+      <description>
+        
+          &lt;p&gt;Visible spectrum is the portion of electromagnetic spectrum that is visible to the human eye. Electromagnetic spectrum in this range of radiation is called visible light. Colors containing only one wavelength are called as pure colors. Pure colors are red, green and blue. Colors such as yellow and magenta can be made by a mix of multiple wavelengths. Combination of all the three colors, red green and blue constitute white.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;images/rgbcolorspace1.png&#34; alt=&#34;alt text&#34; title=&#34;Logo Title Text 1&#34;&gt;&lt;/p&gt;
+&lt;h2&gt;Representation of Images in RGB colorspace. &lt;/h2&gt;
+An image is divided into small homogeneous elements called as pixels. A color of a pixel in the RGB color model is represented by indicating how much of Red Green and blue is included. The color is represented by RGB triplet. Each component can vary from 0 to a maximum value(which is usually 255). If Red, Green and blue components are zero, the color is black. If Red, Green and blue components are maximum, the color is white. If Red and Green are maximum and blue is zero, the color is yellow.
+&lt;h2&gt;RGB32 color format&lt;/h2&gt;
+In RGB32 color format, 8 bits are allocated for representing each color, that is, 8 bits for Red, 8 for Green and 8 for blue. The last 8 bits are usually discarded. Sometimes, the last 8 bits are used to store alpha, which represents the transparency of an image. The transparency plays an important role while blending of two images. This technique is used to represent transparent logos on the original images. In the picture below, the yellow apple is a transparent image, which is superimposed on the flower, which is the original image. (Techniques of alpha blending will be discussed in detail in the next blog). 32 bit representation is used to represent 16,777,216 colors.
+
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Scripting-How is it different from programming?</title>
+      <link>https://example.com/post/scripting-programming/</link>
+      <pubDate>Fri, 16 Aug 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/post/scripting-programming/</guid>
+      <description>
+        
+          &lt;p&gt;What is script for a movie?? Script for a movie describes what actors do. It also describes the interaction between the actors, and connects different sequences of a movie. Scripting languages are also very similar. Scripting is used to automate the execution of tasks which could alternatively be executed one-by-one manually. Environments that can be automated through scripting include software applications, and the operating system shells (OS shells). Scripting languages play a major role in automation testing, because, from a script, you can invoke different programs and test the outputs.&lt;/p&gt;
+&lt;p&gt;During my association at University of Hyderabad, I was working on projects related to Natural language processing, I could see the power of scripting languages. We were building a translation engine, for translating text from one natural language to another, for example from Urdu to Hindi or Sanskrit to Hindi. Scripting languages had the power to use the regular expressions and made text processing very much simpler. Those tasks which required design of state machines in a programming language, could be written by a single line in a scripting language!!!! Let us see an example of a word count program, written in both PERL and C.&lt;/p&gt;
+&lt;p&gt;A word can be defined as set of characters, which are preceded by any number of blank spaces, new lines or tabs. If you had to write the same piece of code in C, a state machine has to be designed (see example in Dennis Ritchie). Scripting language solves the problem with a single line of code.&lt;/p&gt;
+&lt;p&gt;We found highly complex pieces of code, could be written very easily in scripting languages. It has the power to handle regular expressions and text processing.&lt;/p&gt;
+&lt;p&gt;Scripting languages are designed for “gluing” applications. Consider the scenario in which different  modules are written in different languages, like C, Java, C++ etc. and have to be integrated into a single project. Scripting languages play a key role in such type of scenarios.&lt;/p&gt;
+&lt;p&gt;Scripting languages also have the power to access OS facilities. When we were building the migration engine, we could connect to loop devices, do mounts, unmount etc., using python.&lt;/p&gt;
+&lt;p&gt;Scripting languages use typeless approaches to achieve a higher level of programming and more rapid application development than programming languages.  That means, declaration of variables is not required in Scripting. Only assignment would be sufficient.&lt;/p&gt;
+&lt;p&gt;Scripting languages make the life of developer very easy. Enjoy Scripting !!!!!&lt;/p&gt;
+
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Significance of parallel builds</title>
+      <link>https://example.com/post/parallel-builds/</link>
+      <pubDate>Wed, 11 Apr 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/post/parallel-builds/</guid>
+      <description>
+        
+          &lt;p&gt;Parallel builds play a significant role for building projects that require huge RAM to compile.
+The best example is chromium build. Suppose the chrome is built by&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;make chrome
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Sometimes, we run into linker errors.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;collect2: ld terminated with signal &lt;span class=&#34;m&#34;&gt;6&lt;/span&gt; Aborted terminate called 
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;after throwing an  instance of &lt;span class=&#34;s1&#34;&gt;&amp;#39;std::bad_alloc&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Building the code by the command&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;make -j6 chrome
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;resolves the liker errors and the build goes through.&lt;/p&gt;
+&lt;h3&gt;What really happens during a parallel build?&lt;/h3&gt;
+&lt;p&gt;To do a parallel build, add -jX where X is the number of make processes to start-up. This is useful for multiple-core machines. Unlike the normal procedural languages like C,C++,PERL etc which execute the commands step by step, make is a utility which does not specify particular order for operations. Each step is taken when necessary dependencies are completed. For multiprocessor machines, the advantage of parallel build is much more because additional CPUs can perform multiple compilations faster than a single CPU.
+Parallel builds can be faster even in uniprocessor environment, because make files perform tasks that can be carried out in parallel, such as such as compiling C source to object files and  creating libraries out of object files. Based on the dependencies of header files, multiple source files can be compiled in parallel.&lt;/p&gt;
+&lt;h3&gt;How does parallel build resolve the linker errors?&lt;/h3&gt;
+The kernel is a piece of software that provides a layer between the hardware and the application programs running on a computer. All the other applications that we have with Linux distribution such as the GNOME window manager, web browsers, etc. are just applications that happen to run on Linux kernel and are not part of the operating system. The kernel makes its services available to the application programs that run on it through a large collection of entry points,known as system calls. From a programmer’s viewpoint,
+these look just like ordinary function calls, although in reality a system call involves a distinct switch in the operating mode of the processor from user space to kernel space.
+The kernel has to work hard to maintain this same abstraction when the filesystem itself might be stored in any of several formats, on local storage devices such as hard disks, CDs or USB memory sticks.
+Swap space in Linux is used when the amount of physical memory (RAM) is full. If the system needs more memory resources and the RAM is full, inactive pages in memory are moved to the swap space. Swap space is located on hard drives, which have a slower access time than physical memory. Each process runs under the illusion that it has an address space (a valid range of memory addresses) to call its own. In reality, it’s sharing the physical memory of the computer with many other processes, and if the system is running low on memory, some of its address space may even be parked out on the disk in the swap area. The parallel builds run as a part of different processes and utilize the physical memory space more efficiently, thus preventing the linker errors during parallel build.
+
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>

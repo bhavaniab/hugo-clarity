@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>RTOS on IRA - Information Retrieval and Analytics</title>
+    <link>https://example.com/categories/rtos/</link>
+    <description>Recent content in RTOS on IRA - Information Retrieval and Analytics</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <lastBuildDate>Wed, 15 Jul 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://example.com/categories/rtos/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Gesture events in BREWMP</title>
+      <link>https://example.com/post/gesture-brewmp/</link>
+      <pubDate>Wed, 15 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/post/gesture-brewmp/</guid>
+      <description>
+        
+          &lt;p&gt;Smart phones and a few of the feature phones have the touch screen support. When we tap on the touch screen of mobile device, we don&#39;t realize the time and effort spent by the developer in building the amazing apps. The apps seem to be working so seamlessly. In this post, I would like to discuss in detail the complex state machine that our team had designed and implemented to differentiate various gesture events in BREW mobile devices.&lt;/p&gt;
+&lt;p&gt;The BREW mobile devices are sensitive to a wide range of touch events. They are tap, tap and hold, double tap, flick, panning, and double touch. There are certain events which get triggered when a user taps on the screen of the mobile device. For each AEEEvent, the wParam and dwParam parameters (if any) are passed to the applet or control.
+Some of the platform events or are as follows:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;EVT_POINTER_DOWN&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;EVT_POINTER_MOVE&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;EVT_POINTER_STALE_MOVE&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;EVT_POINTER_UP&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;EVT_POINTER_MT_MOVE&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;EVT_POINTER_MT_STALE_MOVE&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;EVT_POINTER_MT_DOWN&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;EVT_POINTER_MT_UP&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;These platform events, have their own limitations when they are being deployed on real time applications.For example, when a user moves his finger slightly on the screen of the BREW mobile, three events are triggered, EVT_POINTER_DOWN,EVT_POINTER_MOVE and EVT_POINTER_STALE_MOVE. Since the touch observer is very sensitive to the movement of the pointer, sometimes EVT_POINTER_MOVE is triggered in case of a tap. Double tap events also trigger tap events as a double tap is a combination of two successive single taps. It is highly challenging to differentiate between, tap, double tap, tab and hold,panning and flick events. Therefore, user defined events are declared for the gesture events, and a state machine is designed.Following user defined states are declared:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GESTURE_INVALID&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TAP_PRESS_EVENT&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TAP_RELEASE_EVENT&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;DOUBLE_TAP_EVENT&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The user defined events are:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TAP_EVENT&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TAP_N_HOLD_EVENT&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PANNING_EVENT&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;FLICK_EVENT&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PANNING_EVENT&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The entire state machine for differentiation of these events is described in terms of the functionality that is executed at each state.&lt;/p&gt;
+&lt;h3&gt;GESTURE_INVALID&lt;/h3&gt;
+This is the start state. When the event EVT_POINTER_DOWN is received, the present state is changed to TAP_PRESS_EVENT. In case of any other event received, the state remains unchanged.
+&lt;h3&gt;TAP_PRESS_EVENT&lt;/h3&gt;
+&lt;p&gt;In this state,the TAP_N_HOLD_EVENT is differentiated from rest of the events.When the timer callback is called (the timer has expired), and the pointer is down, then the event is TAP_N_HOLD_EVENT. If the timer does not expire, curr_x, curr_y and curr_time are saved and the timer is reset. If EVT_POINTER_UP is received, there is a state change to the TAP_RELEASE_EVENT.&lt;/p&gt;
+&lt;h3&gt;TAP_RELEASE_EVENT&lt;/h3&gt;
+In the present state, if the timer expires, then it is a TAP_EVENT. If the timer does not expire, the event can be a DOUBLE_TAP_EVENT, PANNING_EVENT or FLICK_EVENT. If EVT_POINTER_DOWN is received, then the state is changed to DOUBLE_TAP_EVENT and DOUBLE_TAP_EVENT is registered. The curr_x, curr_y and curr_y are updated.
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;curr_x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;curr_y&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;curr_time&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;time&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3&gt;PANNING_EVENT and FLICK_EVENT&lt;/h3&gt;
+When there is a EVT_POINTER_MOVE or EVT_POINTER_STALE_MOVE,the current state is changed to PANNING_EVENT if the following condition is met:
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;curr_x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;prev_x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;PANNING_PIXEL_MARGIN&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;curr_y&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;prev_y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;PANNING_PIXEL_MARGIN&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The curr_x, curr_y, prev_x and prev_y are now updated with the latest values.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;prev_x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;curr_x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;prev_y&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;curr_y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;curr_x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;curr_y&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In case an EVT_POINTER_UP is received, check is made whether PANNING_EVENT is a FLICK_EVENT. The speed at which the pointer is moved can be determined by:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;IObserver_GetLLMSpeed&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pMe&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;piTouchObserver&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;speed&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If speed &amp;lt; 1000 PANNING_END_EVENT is registered and the current state is reset to the start state GESTURE_INVALID. If speed &amp;gt; MAX_SPEED_FOR_PANNING , then FLICK_EVENT is registered, otherwise PANNING_END_EVENT is registered. The variables representing the x and y positions are again reset.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;prev_x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;curr_x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;prev_y&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;curr_y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Displaying map between two cities on BREW MP</title>
+      <link>https://example.com/post/brewmp-map/</link>
+      <pubDate>Fri, 16 Aug 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/post/brewmp-map/</guid>
+      <description>
+        
+          &lt;p&gt;Maps are one of the most important applications on the feature phones. The post describes development of an application to display map between two cities on BrewMP mobile platform. The UI has two text fields To and From, where source and destination are entered. Upon pressing the SELECT key, the application loads the  map between two cities.  Along with the basic UI, a surface media widget was initialized and associated with the root container. This was integrated with the backend Webkit rendering engine. When the select key was pressed, a query with the data from two text fields is passed on to the google maps, through the IWeb. The Iweb then gets the data from the google server, and the data is passed on to the webkit engine, which in turn renders the web page.&lt;/p&gt;
+&lt;h3&gt;Overview of the User Interface&lt;/h3&gt;
+A simple user interface was developed which has two prop containers, each containing a static widget and a text field. Prop widgets are placed in root container, along with the surface media widget. The surface media widget is responsible for displaying web view.
+&lt;h3&gt;Setting up of root container and Canvas&lt;/h3&gt;
+Using window manager, create a full screen window and associate the root widget with the window widget. Create an instance of root container and display canvas. Associate root container and display canvas with one another.
+The ICanvas interface provides a drawing surface for widgets and other components to draw upon.  ICanvas is used in conjunction with IDisplay and IRootContainer. Typically at the startup of the application, you get an ICanvas.
+IDisplay can be setup using 
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;IDisplayCanvas_SetDisplay&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Finally ICanvas can be set to Root Container using&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;IRootContainer_SetCanvas&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;A new instance of the display canvas class object may be created by calling ISHELL_CreateInstance() and passing in AEECLSID_DisplayCanvas.  This way the root container (and any widgets contained in it) can actually display to the screen.&lt;/p&gt;
+&lt;p&gt;Enable touch on the root container&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;IWidget_EnableTouch&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pMe&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;piwRootwidget&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3&gt;Surface media widget in BREW MP&lt;/h3&gt;
+The surface media widget is a user interface element for intergrating surfaced media objects, such as video or camera,web view area within a widget tree. This media source is contained in within a SurfacedMediaModel, and its content is rendered to a surface or surface container specified by the widget. Typically, widget sets the media size based on its own extent, by calling ISurfacedMediaModel_SetSize().
+&lt;p&gt;To create a surface media widget, an instance of the surfaced media widget using AEECLSID_CSurfacedMediaWidget needs to be initialized. Configure the widget and set the extent using IWidget_SetExtent. Provide the destination surface container to the widget. Create an instance of ISurfacedMediaModel and call IWidget_SetModel on the widget. Surface media widget is associated with the model interface. This enables the widget to listen to and handle various touch events from the webpage.  The surface media widget is interfaced with the webview of the Webkit backend rendering engine to display web pages.&lt;/p&gt;
+&lt;h3&gt;IWeb Application in BREW MP&lt;/h3&gt;
+The main purpose of the IWEB API is to make HTTP requests using a BREW application. IWEB manages its own connections and sockets thereby making it much easier to do web transactions. I Web is responsible for establishing the connection to the server and then trasfering data to the local system using HTTP “GET” method.  When the IWeb engine gets response from ther server, a callback is called. The response can be extracted from callback using IWEBRESP_GetInfo. The response usually contains the header along with
+the data that contains HTML tags.  Data is transfered to the webkit rendering engine for rendering the webpages.
+
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>

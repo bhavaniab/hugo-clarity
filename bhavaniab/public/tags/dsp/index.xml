@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DSP on IRA - Information Retrieval and Analytics</title>
+    <link>https://example.com/tags/dsp/</link>
+    <description>Recent content in DSP on IRA - Information Retrieval and Analytics</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved.</copyright>
+    <lastBuildDate>Tue, 28 Jul 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://example.com/tags/dsp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Representation of fractional numbers on Hardware – The fixed point representation</title>
+      <link>https://example.com/post/binary-representation/</link>
+      <pubDate>Tue, 28 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/post/binary-representation/</guid>
+      <description>
+        
+          &lt;p&gt;In the hardware world, a number can be represented only by ones and zeros. How do we represent fractional numbers if that’s the case? How do we represent negative numbers in Hardware?
+While designing hardware systems, engineers often overlook the range and end up losing some of the bits especially the most significant bits due to overflow, resulting in inconsistent results in the simulation.Therefore, it’s important for DSP Engineers and Hardware designers to know about different ways to represent the fractional numbers.&lt;/p&gt;
+&lt;p&gt;Fractional numbers can be represented in different ways like Fixed point representation, Unsigned fixed point representation, IEEE754 representation etc.&lt;/p&gt;
+&lt;p&gt;The current blog-post discusses in detail about the Fixed point representation of integers, fractional numbers and negative numbers.&lt;/p&gt;
+&lt;h4&gt;Binary representation of a number&lt;/h4&gt;
+The number 45 can be represented in binary as (101101)&lt;sub&gt;2&lt;/sub&gt;
+&lt;p&gt;$$
+(2^0 \times 1) + (2^1 \times 0) + (2^2 \times 1) + (2^3 \times 1) + (2^4 \times 0) + (2^5 \times 1) \newline
+= 1 + 4 + 8 + 32
+= 45_{10}
+$$&lt;/p&gt;
+&lt;h3&gt;Binary representation of fractional numbers&lt;/h3&gt;
+Let’s take the example of (1011.01)&lt;sub&gt;2&lt;/sub&gt;
+&lt;p&gt;$$
+= (2^{-1} \times 0) + ( 2^{-2} \times 1) + (2^{0} \times 1) + (2^{1} \times 1) + (2^{2} \times 0) + (2^{3} \times 1) \newline
+= 0 + 0.25 + 1+2 + 8 \newline
+=  11.25_{10}
+$$&lt;/p&gt;
+&lt;h4&gt;Representation of a negative numbers – the two’s complement representation.&lt;/h4&gt;
+&lt;p&gt;Let’s take the example of 8 bit two’s complement representation.&lt;/p&gt;
+&lt;p&gt;$$
+-45_{10} = 11010011_{2}
+$$&lt;/p&gt;
+&lt;p&gt;The two complement of a number can be calculated as follows:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Write the binary representation of the number
+$$
+00101101_2
+$$&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Invert the bits, 0 becomes 1 and 1 becomes 0.
+$$
+11010010_2
+$$&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Add 1 to the bits inverted
+$$
+11010011_2
+$$&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4&gt;Fixed point representation&lt;/h4&gt;
+Representation of fixed point number, the width of the number and the binary point position of the number.
+The fixed point numbers are represented using two parameters, the width of the number representation and the binary point position within the number. We use the notation fixed&lt;w,b&gt; where w denotes the number of bits used and b denotes the binary point counting from the least significant bit.
+Let’s take the example of 11.25 discussed above.
+$$
+  11.25_{10} = 001011.01_2 \newline
+fixed&lt;8,2&gt; = 00101101_2 \newline
+$$
+fixed&lt;8,2&gt; represents 8 bit fixed point number, where the two rightmost bits are fractional and 6 bits are for decimal representation.
+$$
+  5.625_{10} = 00101.101_2 \\
+  fixed&lt;8,3&gt; = 00101101_2 \\
+$$
+The same bit pattern 00101101 can also be used to represent number 5.625, where 5 bits and 3 are decimal bits. Integer numbers can be represented with 0 bits as fractional.
+$$
+ 5.625_{10} = 00101.101_2 \\
+ 45_{10} = 00101101_2 \\ 
+ fixed&lt;8,0&gt; = 00101101_2 \\ 
+$$
+&lt;h4&gt;Representation of negative numbers in fixed point representation, the 2’s compliment &lt;/h4&gt;
+2’s compliment is used in representing numbers in the fixed point notation.
+$$
+ -45_{10} = 11010011_2 \\ 
+ fixed&lt;8,0&gt; = 11010011_2 \\ 
+$$
+&lt;p&gt;Similarly -11.25 can be represented as
+$$
+fixed&amp;lt;8,2&amp;gt; = (11010011)2
+$$&lt;/p&gt;
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>How are videos stored in the digital world- Sampling of video?</title>
+      <link>https://example.com/post/video-sampling/</link>
+      <pubDate>Wed, 15 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/post/video-sampling/</guid>
+      <description>
+        
+          &lt;p&gt;Sampling of an audio signal converts continuous time signal into a discrete time signal. Quantization converts continuous amplitude signal into a discrete amplitude signal. A discrete time and discrete amplitude signal is a digital signal. The present post describes the sampling of a video signal, different characteristics of the video which are considered for sampling, spatial sampling and temporal sampling. A real world video is composed of multiple objects each with their own characteristic shape, depth, texture and illumination. The color and brightness of a natural video changes with varying degrees of smoothness throughout the video (‘continuous tone’). Characteristics of a typical natural video frames that are relevant for video processing and compression include spatial characteristics (texture variation within scene, number and shape of objects, color, etc.) and temporal characteristics (object motion, changes in illumination, movement of the camera or viewpoint and so on). A natural video is spatially and temporally continuous. Representing a video in digital form involves sampling the real scene spatially and temporally.&lt;/p&gt;
+&lt;h3&gt;Spatial sampling&lt;/h3&gt;
+&lt;p&gt;Sampling the signal at a point in time produces a sampled image or frame that has defined values at a set of sampling points. The most common format for a sampled image is a rectangle with the sampling points positioned on a square or rectangular grid. Figure 1 shows a continuous-tone frame with two different sampling grids superimposed upon it. Sampling occurs at each of the intersection points on the grid and the sampled image may be reconstructed by representing each sample as a square picture element (pixel). The visual quality of the image is influenced by the number of sampling points. Choosing a ‘coarse’ sampling grid produces a low-resolution sampled image whilst increasing the number of sampling points slightly increases the resolution of the sampled image.&lt;/p&gt;
+&lt;h3&gt;Temporal sampling&lt;/h3&gt;
+&lt;p&gt;A moving video image is captured by taking a rectangular ‘snapshot’ of the signal at periodic time intervals. Playing back the series of frames produces the appearance of motion. A higher temporal sampling rate (frame rate) gives apparently smoother motion in the video scene but requires more samples to be captured and stored. Frame rates below 10 frames per second are sometimes used for very low bit-rate video communications (because the amount of data is relatively small) but motion is clearly jerky and unnatural at this rate. Between 10 and 20 frames per second is more typical for low bit-rate video communications; the image is smoother but jerky motion may be visible in fast-moving parts of the sequence. Sampling at 25 or 30 complete frames per second is standard for television pictures (with interlacing to improve the appearance of motion, see below); 50 or 60 frames per second produces smooth apparent motion (at the expense of a very high data rate).&lt;/p&gt;
+
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Representation of images in the Digital world -The RGB Colorspace</title>
+      <link>https://example.com/post/rgb-colorspace/</link>
+      <pubDate>Wed, 15 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/post/rgb-colorspace/</guid>
+      <description>
+        
+          &lt;p&gt;Visible spectrum is the portion of electromagnetic spectrum that is visible to the human eye. Electromagnetic spectrum in this range of radiation is called visible light. Colors containing only one wavelength are called as pure colors. Pure colors are red, green and blue. Colors such as yellow and magenta can be made by a mix of multiple wavelengths. Combination of all the three colors, red green and blue constitute white.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;images/rgbcolorspace1.png&#34; alt=&#34;alt text&#34; title=&#34;Logo Title Text 1&#34;&gt;&lt;/p&gt;
+&lt;h2&gt;Representation of Images in RGB colorspace. &lt;/h2&gt;
+An image is divided into small homogeneous elements called as pixels. A color of a pixel in the RGB color model is represented by indicating how much of Red Green and blue is included. The color is represented by RGB triplet. Each component can vary from 0 to a maximum value(which is usually 255). If Red, Green and blue components are zero, the color is black. If Red, Green and blue components are maximum, the color is white. If Red and Green are maximum and blue is zero, the color is yellow.
+&lt;h2&gt;RGB32 color format&lt;/h2&gt;
+In RGB32 color format, 8 bits are allocated for representing each color, that is, 8 bits for Red, 8 for Green and 8 for blue. The last 8 bits are usually discarded. Sometimes, the last 8 bits are used to store alpha, which represents the transparency of an image. The transparency plays an important role while blending of two images. This technique is used to represent transparent logos on the original images. In the picture below, the yellow apple is a transparent image, which is superimposed on the flower, which is the original image. (Techniques of alpha blending will be discussed in detail in the next blog). 32 bit representation is used to represent 16,777,216 colors.
+
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Sine generator on FPGA-The Direct Digital Synthesizer</title>
+      <link>https://example.com/post/sine-generator/</link>
+      <pubDate>Tue, 30 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/post/sine-generator/</guid>
+      <description>
+        
+          &lt;p&gt;“I need a sine generator for my module.  How do I generate sine/cosine signals, when the module has to be implemented in hardware?”.&lt;/p&gt;
+&lt;p&gt;The interesting question was asked by a student who was pursuing masters in VLSI design. She was trying to build a demodulator module for Binary Phase shift Keyed (BFSK) signals on the FPGA.
+Here is the blog post that gives a detail description of sine/cosine generators, that can be implemented on the FPGA.&lt;/p&gt;
+&lt;p&gt;Sine generators are one of the important components in many of the DSP applications. They are used in modulators, demodulators, up converters, down converters, etc.&lt;/p&gt;
+&lt;p&gt;The output of the sine/cosine wave is defined as:
+O(t) = sin((2&lt;em&gt;pi&lt;/em&gt;frequency*t) + Phase)
+where the ‘frequency’ represents the desired output frequency of a sine wave in Hertz and Phase represents a phase offset in radians per second.
+A common method for digitally generating a sine/cosine wave is to employ a look up table scheme. The look up table stores samples of a sine wave.  A digital integrator is used to generate a suitable phase argument that is mapped by the look up table to generate the output waveform.&lt;/p&gt;
+&lt;h3&gt;Operation of the DDS block&lt;/h3&gt;
+The figure gives an overview of the Xilinx DDS compiler core. D1 and A1 constitute the phase accumulator, which contains collection of components used to generate precise address which is given as the input to the look up table. The phase accumulator consists of an input phase angle or the “tuning word” which specifies the phase increment. The Phase register D1, stores the previous phase angle. The adder A1 adds the previous phase angle stored in D1 with the input tuning word to generate the actual phase. Quarter wave symmetry of sine wave can be exploited to represent the waveform using shorter look up tables. The quantizer block Q1 is used to map the actual value of phase to the shortened tables. This value is presented at the input address port of look up table T1.
+&lt;h3&gt;Computation of the output frequency of DDS Block&lt;/h3&gt;
+The output frequency fout of DDS block is the function of FPGA system clock frequency fclk, the number of bits in the phase accumulation Bθ(n) and the phase increment value Δθ.
+
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>
